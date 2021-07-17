@@ -1,6 +1,8 @@
 package commands.manager;
 
+import commands.Clear;
 import commands.Help;
+import commands.Info;
 import commands.Server;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Message;
@@ -18,6 +20,8 @@ public class CommandManager {
 
         this.commands.put("help", new Help());
         this.commands.put("server", new Server());
+        this.commands.put("info", new Info());
+        this.commands.put("clear", new Clear());
     }
 
     public boolean perform(String command, Member m, TextChannel channel, Message message, MessageReceivedEvent e) {
