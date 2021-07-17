@@ -2,6 +2,7 @@ package main;
 
 import commands.manager.CommandListener;
 import commands.manager.CommandManager;
+import listener.TalkListener;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.entities.Activity;
@@ -38,6 +39,7 @@ public class Main {
 
         // Listener
         builder.addEventListeners(new CommandListener());
+        builder.addEventListeners(new TalkListener());
 
         builder.build();
         System.out.println("Bot fährt hoch!");
