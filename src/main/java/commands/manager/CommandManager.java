@@ -4,6 +4,7 @@ import commands.Clear;
 import commands.Help;
 import commands.Info;
 import commands.Server;
+import musik.Music;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.TextChannel;
@@ -22,6 +23,7 @@ public class CommandManager {
         this.commands.put("server", new Server());
         this.commands.put("info", new Info());
         this.commands.put("clear", new Clear());
+        this.commands.put("m", new Music());
     }
 
     public boolean perform(String command, Member m, TextChannel channel, Message message, MessageReceivedEvent e) {

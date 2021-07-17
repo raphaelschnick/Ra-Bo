@@ -21,6 +21,12 @@ public class Help implements ServerCommand {
                 "\r\n" +
                 ":man_shrugging: `" + Main.PREFIX + "help` --> Get Help.\r\n" +
                 "\r\n" +
+                ":gear: `" + Main.PREFIX + "info <@member>` --> Get all information about a member.\r\n" +
+                "\r\n" +
+                ":pencil2: `" + Main.PREFIX + "clear <number>` --> Clear Messages.\r\n" +
+                "\r\n" +
+                ":headphones: `" + Main.PREFIX + "m help` --> Get Music Help.\r\n" +
+                "\r\n" +
                 ":bulb: `" + Main.PREFIX + "server` --> Get the latest server stats.\r\n").build()
         ).complete();
         return null;
