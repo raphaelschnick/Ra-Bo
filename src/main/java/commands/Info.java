@@ -17,9 +17,9 @@ public class Info implements ServerCommand {
 	public List<Message> performCommand(Member m, TextChannel channel, Message message, MessageReceivedEvent e) {
 		String[] args = message.getContentDisplay().split(" ");
 		
-        if(args.length <1) {
+        if(args.length <= 1) {
             e.getTextChannel().sendMessage(
-                    new EmbedBuilder().setColor(Color.GREEN).setDescription("Info �ber: " + e.getMessage().getAuthor().getName() + " #" + e.getMessage().getAuthor().getDiscriminator() + "\n "
+                    new EmbedBuilder().setColor(Color.GREEN).setDescription("Info über: " + e.getMessage().getAuthor().getName() + " #" + e.getMessage().getAuthor().getDiscriminator() + "\n "
                             + "Nichname: " + Objects.requireNonNull(e.getMember()).getNickname() + "\n"
                             + "ID: " + e.getMessage().getAuthor().getId() + "\n"
                             + "Avatar: " + e.getMessage().getAuthor().getEffectiveAvatarUrl() + "\n"

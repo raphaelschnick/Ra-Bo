@@ -6,6 +6,7 @@ import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.exceptions.InsufficientPermissionException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,19 +17,23 @@ public class Clear implements ServerCommand {
 	@Override
 	public List<Message> performCommand(Member m, TextChannel channel, Message message, MessageReceivedEvent e) {
 		String[] args = message.getContentDisplay().split(" ");
+		try {
+			message.delete().queue();
+			if(args.length == 2) {
+				try {
+					int amount = Integer.parseInt(args[1]);
+					channel.purgeMessages(get(channel, amount));
+					channel.sendMessage("`" + amount + "` messages deleted!").complete().delete().queueAfter(3, TimeUnit.SECONDS);
+				} catch (NumberFormatException e2) {
+					e2.printStackTrace();
+				}
 
-		message.delete().queue();
-		if(args.length == 2) {
-			try {
-				int amount = Integer.parseInt(args[1]);
-				channel.purgeMessages(get(channel, amount));
-				channel.sendMessage("`" + amount + "` messages deleted!").complete().delete().queueAfter(3, TimeUnit.SECONDS);
-			} catch (NumberFormatException e2) {
-				e2.printStackTrace();
 			}
-
+			return null;
+		} catch (InsufficientPermissionException exception) {
+			channel.sendMessage("Missing Permission: Message_Manage!").queue();
+			return null;
 		}
-		return null;
 	}
 
 	public List<Message> get(MessageChannel channel, int amount){
