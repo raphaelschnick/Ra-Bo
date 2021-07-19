@@ -67,21 +67,7 @@ public  class Music implements ServerCommand {
 
 		switch (args[1].toLowerCase()) {
 			case "help":
-				e.getTextChannel().sendMessage(
-						new EmbedBuilder().setColor(Color.GREEN).setDescription(
-							":headphones: **Music help**\r\n" +
-							"\r\n" +
-							":microphone:`!m play <url>` --> Let the bot play music.\r\n" +
-							"\r\n" +
-							":mag: `!m now` -->  Show you the current song\r\n" +
-							"\r\n" +
-							":twisted_rightwards_arrows: `!m shuffle` --> Activate shuffle in your playlist\r\n" +
-							"\r\n" +
-							":track_next: `!m skip` --> Skip the current song \r\n" +
-							"\r\n" +
-							":no_entry:`!m stop` --> Stop the current song\r\n"
-						).build()
-				).complete();
+				e.getTextChannel().sendMessage(help()).complete();
 				break;
 			case "play":
 			case "p":

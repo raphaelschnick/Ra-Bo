@@ -27,7 +27,13 @@ public class Help implements ServerCommand {
                 "\r\n" +
                 ":headphones: `" + Main.PREFIX + "m help` --> Get Music Help.\r\n" +
                 "\r\n" +
-                ":bulb: `" + Main.PREFIX + "server` --> Get the latest server stats.\r\n").build()
+                ":bulb: `" + Main.PREFIX + "server` --> Get the latest server stats.").build()
+        ).complete();
+        channel.sendMessage(
+                new EmbedBuilder().setColor(Color.ORANGE).setDescription(
+                "**Ra-Bo auf dein Server holen:** \n https://discord.com/api/oauth2/authorize?client_id=865523259701198879&permissions=8&scope=bot\r\n\n" +
+                ":desktop: **Entwickler:** Rapha#8081 \r\n\n" +
+                ":placard: **Code:** https://github.com/raphaelschnick/Ra-Bo").build()
         ).complete();
         return null;
     }

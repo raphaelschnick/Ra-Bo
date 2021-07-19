@@ -14,6 +14,14 @@ repositories {
     }
 }
 
+jar {
+    manifest {
+        attributes(
+                'Main-Class': 'main.Main'
+        )
+    }
+}
+
 dependencies {
     implementation 'com.sedmelluq:lavaplayer:1.3.77'
     implementation 'net.dv8tion:JDA:4.3.0_277'
