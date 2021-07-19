@@ -5,6 +5,7 @@ import com.sedmelluq.discord.lavaplayer.player.DefaultAudioPlayerManager;
 import com.sedmelluq.discord.lavaplayer.source.AudioSourceManagers;
 import commands.manager.CommandListener;
 import commands.manager.CommandManager;
+import listener.GuildListener;
 import listener.TalkListener;
 import musik.MusicListener;
 import musik.PlayerManager;
@@ -26,6 +27,8 @@ public class Main {
 
     private JDA jda;
 
+    private MySQL mySQL;
+
     private CommandManager cmdMan;
 
     public static void main(String[] args)  {
@@ -39,7 +42,7 @@ public class Main {
 
     public Main() throws LoginException {
         INSTANCE = this;
-        JDABuilder builder = JDABuilder.createDefault(SECRETS.TOKEN);
+        JDABuilder builder = JDABuilder.createDefault(Secrets.TOKEN);
 
         builder.setActivity(Activity.playing(PREFIX + "help"));
         builder.setStatus(OnlineStatus.ONLINE);
@@ -54,12 +57,17 @@ public class Main {
         builder.addEventListeners(new CommandListener());
         builder.addEventListeners(new TalkListener());
         builder.addEventListeners(new MusicListener());
+        builder.addEventListeners(new GuildListener());
 
         this.setJda(builder.build());
         System.out.println("Bot fährt hoch!");
 
         AudioSourceManagers.registerRemoteSources(audioPlayerManager);
         audioPlayerManager.getConfiguration().setFilterHotSwapEnabled(true);
+
+        MySQL mySQL = new MySQL();
+        this.setMySQL(mySQL);
+        mySQL.init();
     }
 
     public CommandManager getCmdMan() {
@@ -92,5 +100,13 @@ public class Main {
 
     public void setJda(JDA jda) {
         this.jda = jda;
+    }
+
+    public MySQL getMySQL() {
+        return mySQL;
+    }
+
+    public void setMySQL(MySQL mySQL) {
+        this.mySQL = mySQL;
     }
 }
