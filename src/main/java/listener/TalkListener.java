@@ -13,7 +13,7 @@ import javax.annotation.Nonnull;
 
 public class TalkListener extends ListenerAdapter {
 
-	private final String tempSuffix = "[Join]";
+	private final String tempSuffix = "Talk [Join]";
 	private final String acSuffix = "[Talk]";
 	
 	public void createAutoChannel(Member member, VoiceChannel joinedChannel) {
