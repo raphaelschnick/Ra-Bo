@@ -63,8 +63,9 @@ public class GuildListener extends ListenerAdapter {
                     break;
             }
             String prefix = "!";
+            String query = String.format("SELECT prefix FROM config WHERE id='%s'", id);
             try {
-                prefix = Main.INSTANCE.getMySQL().executeQuery(String.format("SELECT prefix FROM config WHERE id='%s'", id)).getString("prefix");
+                prefix = Main.INSTANCE.getMySQL().executeQuery(query).getString("prefix");
             } catch (SQLException ex) {
                 System.out.println(ex.getMessage());
             }

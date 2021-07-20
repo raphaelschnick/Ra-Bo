@@ -13,8 +13,12 @@ import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.entities.Activity;
+import net.dv8tion.jda.api.sharding.ShardManager;
 
 import javax.security.auth.login.LoginException;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class Main {
 
@@ -60,7 +64,7 @@ public class Main {
         builder.addEventListeners(new GuildListener());
 
         this.setJda(builder.build());
-        System.out.println("Bot fährt hoch!");
+        System.out.println("Bot starts up!");
 
         AudioSourceManagers.registerRemoteSources(audioPlayerManager);
         audioPlayerManager.getConfiguration().setFilterHotSwapEnabled(true);
@@ -68,6 +72,38 @@ public class Main {
         MySQL mySQL = new MySQL();
         this.setMySQL(mySQL);
         mySQL.init();
+
+        shutdown();
+    }
+
+    public void shutdown() {
+
+        new Thread(() -> {
+
+            String line = "";
+            BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+            try {
+                while((line = reader.readLine()) != null) {
+
+                    if(line.equalsIgnoreCase("stop")) {
+                        ShardManager shardMan = this.getJda().getShardManager();
+                        if(shardMan != null) {
+                            shardMan.setStatus(OnlineStatus.OFFLINE);
+                            shardMan.shutdown();
+                            this.getMySQL().disconnect();
+                            System.out.println("Bot shuts down");
+                        }
+                        reader.close();
+                    } else {
+                        System.out.println("Use 'stop' to shutdown the Bot.");
+                    }
+
+                }
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
+            }
+
+        }).start();
     }
 
     public CommandManager getCmdMan() {

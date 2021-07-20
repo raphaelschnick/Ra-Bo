@@ -25,6 +25,16 @@ public class MySQL {
         }
     }
 
+    public void disconnect() {
+        try {
+            this.getConnection().close();
+            this.setConnection(null);
+            System.out.println("MySQL disconnected!");
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
     public void init() {
         this.execute("CREATE TABLE IF NOT EXISTS config (" +
                 "id VARCHAR(100) NOT NULL PRIMARY KEY," +
