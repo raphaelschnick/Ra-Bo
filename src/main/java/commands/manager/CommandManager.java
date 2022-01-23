@@ -1,9 +1,6 @@
 package commands.manager;
 
-import commands.Clear;
-import commands.Help;
-import commands.Info;
-import commands.Server;
+import commands.*;
 import musik.Music;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Message;
@@ -24,6 +21,7 @@ public class CommandManager {
         this.commands.put("info", new Info());
         this.commands.put("clear", new Clear());
         this.commands.put("m", new Music());
+        this.commands.put("sybit", new Sybit());
     }
 
     public boolean perform(String command, Member m, TextChannel channel, Message message, MessageReceivedEvent e) {

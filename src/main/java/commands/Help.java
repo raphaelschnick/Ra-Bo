@@ -21,7 +21,7 @@ public class Help implements ServerCommand {
         String query = String.format("SELECT prefix FROM config WHERE id='%s'", id);
         try {
             prefix = Main.INSTANCE.getMySQL().executeQuery(query).getString("prefix");
-        } catch (SQLException ex) {
+        } catch (SQLException | NullPointerException ex) {
             System.out.println(ex.getMessage());
         }
         channel.sendMessage(

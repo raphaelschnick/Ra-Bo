@@ -18,11 +18,14 @@ public class CommandListener extends ListenerAdapter {
         String id = e.getGuild().getId();
         String prefix = "!";
         String query = String.format("SELECT prefix FROM config WHERE id='%s'", id);
+
         try {
             prefix = Main.INSTANCE.getMySQL().executeQuery(query).getString("prefix");
-        } catch (SQLException ex) {
+        } catch (SQLException | java.lang.NullPointerException ex) {
+            prefix = "!";
             System.out.println(ex.getMessage());
         }
+
 
         String message = e.getMessage().getContentDisplay();
 

@@ -1,6 +1,10 @@
 package main;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 public class MySQL {
 
@@ -47,7 +51,7 @@ public class MySQL {
         try {
             Statement statement = this.getConnection().createStatement();
             return statement.executeQuery(query);
-        } catch (SQLException ex) {
+        } catch (SQLException | NullPointerException ex) {
             System.out.println(ex.getMessage());
             return null;
         }
@@ -57,7 +61,7 @@ public class MySQL {
         try {
             Statement statement = this.getConnection().createStatement();
             statement.execute(query);
-        } catch (SQLException ex) {
+        } catch (SQLException | NullPointerException ex) {
             System.out.println(ex.getMessage());
         }
     }
@@ -69,7 +73,7 @@ public class MySQL {
             } else {
                 return this.connect();
             }
-        } catch (SQLException ex) {
+        } catch (SQLException | NullPointerException ex) {
             System.out.println(ex.getMessage());
         }
         return connection;

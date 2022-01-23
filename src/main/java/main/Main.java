@@ -37,6 +37,8 @@ public class Main {
 
     public static void main(String[] args)  {
 
+        System.out.println(Runtime.getRuntime().maxMemory());
+
         try {
             new Main();
         } catch (LoginException e) {
